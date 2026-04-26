@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>from a nomad</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1814;
+    --ink-soft: #6b6760;
+    --ink-faint: #b0ada8;
+    --paper: #faf9f7;
+    --paper-mid: #f0ede8;
+    --accent: #c4793a;
+    --max: 680px;
+  }
+
+  html { font-size: 16px; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  header {
+    padding: 3rem 2rem 2rem;
+    max-width: var(--max);
+    margin: 0 auto;
+    border-bottom: 1px solid var(--paper-mid);
+  }
+
+  .site-title {
+    font-family: 'Lora', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .site-title span {
+    color: var(--accent);
+  }
+
+  .site-tagline {
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 0.25rem;
+  }
+
+  /* ── Nav ── */
+  nav {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    gap: 1.5rem;
+    border-bottom: 1px solid var(--paper-mid);
+  }
+
+  nav a {
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  nav a:hover, nav a.active { color: var(--ink); }
+
+  /* ── Main ── */
+  main {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 3rem 2rem 6rem;
+  }
+
+  /* ── Entry ── */
+  .entry {
+    margin-bottom: 5rem;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .entry:nth-child(1) { animation-delay: 0.1s; }
+  .entry:nth-child(2) { animation-delay: 0.2s; }
+  .entry:nth-child(3) { animation-delay: 0.3s; }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .entry-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .entry-date {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+
+  .entry-location {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .entry-photo {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 1.5rem;
+    filter: saturate(0.9);
+    transition: filter 0.4s ease;
+  }
+
+  .entry-photo:hover { filter: saturate(1.05); }
+
+  .entry-photo-placeholder {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: var(--paper-mid);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    color: var(--ink-faint);
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .entry-text {
+    font-family: 'Lora', serif;
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--ink);
+  }
+
+  .entry-text p + p { margin-top: 1em; }
+
+  .entry-divider {
+    width: 2rem;
+    height: 1px;
+    background: var(--paper-mid);
+    margin: 5rem auto 0;
+  }
+
+  /* ── About page ── */
+  .about-block {
+    display: none;
+    padding-top: 1rem;
+  }
+
+  .about-block.visible { display: block; }
+
+  .about-block h2 {
+    font-family: 'Lora', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    color: var(--ink);
+  }
+
+  .about-block p {
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--ink);
+    margin-bottom: 1.2em;
+  }
+
+  /* ── Feed ── */
+  #feed { display: block; }
+  #feed.hidden { display: none; }
+
+  /* ── Footer ── */
+  footer {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 2rem;
+    border-top: 1px solid var(--paper-mid);
+    font-size: 0.75rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 600px) {
+    header, nav, main, footer { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .entry-text { font-size: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="#" class="site-title" onclick="showFeed(event)">from a <span>nomad</span></a>
+  <p class="site-tagline">a life in motion</p>
+</header>
+
+<nav>
+  <a href="#" class="active" id="nav-journal" onclick="showFeed(event)">Journal</a>
+  <a href="#" id="nav-about" onclick="showAbout(event)">About</a>
+</nav>
+
+<main>
+
+  <div id="feed">
+    <article class="entry">
+      <div class="entry-meta">
+        <span class="entry-date">23 April 2025</span>
+        <span class="entry-location">Chiang Mai, Thailand</span>
+      </div>
+      <div class="entry-photo-placeholder">your photo here</div>
+      <div class="entry-text">
+        <p>Replace this with your first entry. Write however feels natural — a single sentence, a paragraph, a fragment of thought. There are no rules here except honesty.</p>
+        <p>This is your space. The photo anchors it in a place and moment. The words are whatever comes after.</p>
+      </div>
+    </article>
+
+    <div class="entry-divider"></div>
+
+    <article class="entry">
+      <div class="entry-meta">
+        <span class="entry-date">22 April 2025</span>
+        <span class="entry-location">Chiang Mai, Thailand</span>
+      </div>
+      <div class="entry-photo-placeholder">your photo here</div>
+      <div class="entry-text">
+        <p>A second example entry. Delete these placeholders and replace with your own once you're ready to publish.</p>
+      </div>
+    </article>
+  </div>
+
+  <div id="about" class="about-block">
+    <h2>About this journal</h2>
+    <p>This is a quiet corner of the internet. One photo, a few thoughts, published whenever something is worth remembering.</p>
+    <p>Written anonymously, somewhere in the world.</p>
+  </div>
+
+</main>
+
+<footer>
+  from a nomad &nbsp;&middot;&nbsp; written somewhere
+</footer>
+
+<script>
+  function showFeed(e) {
+    e.preventDefault();
+    document.getElementById('feed').classList.remove('hidden');
+    document.getElementById('about').classList.remove('visible');
+    document.getElementById('nav-journal').classList.add('active');
+    document.getElementById('nav-about').classList.remove('active');
+  }
+
+  function showAbout(e) {
+    e.preventDefault();
+    document.getElementById('feed').classList.add('hidden');
+    document.getElementById('about').classList.add('visible');
+    document.getElementById('nav-about').classList.add('active');
+    document.getElementById('nav-journal').classList.remove('active');
+  }
+</script>
+
+</body>
+</html>
